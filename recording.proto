@@ -1,0 +1,56 @@
+syntax = "proto2";
+
+package activitylogger;
+
+message TimelineCreate {
+	required string timelineId = 1;
+	required string sourceId = 2;
+  required string publicKey = 3;
+}
+
+message Access {
+  enum Type {
+    REVOKE = 1;
+    READONLY = 2;
+    WRITEONLY = 3;
+    READWRITE = 4;
+  }
+	required string timelineId = 1;
+	required uint64 sourceId = 2;
+  required string publicKey = 3;
+  required Type state = 4;
+}
+
+message Interaction {
+	required string timelineId = 1;
+	required string sourceId = 2;
+	required uint64 timeStart = 3;
+	required uint64 timeEnd = 4;
+  optional string window = 5;
+  required uint32 keypresses = 6;
+  required uint32 mousepresses = 7;
+}
+
+message WindowActivity {
+	required string timelineId = 1;
+	required string sourceId = 2;
+	required uint64 timeStart = 3;
+	required uint64 timeEnd = 4;
+  repeated string titles = 5;
+}
+
+message FolderActivity {
+	required string timelineId = 1;
+	required string sourceId = 2;
+	required uint64 timeStart = 3;
+	required uint64 timeEnd = 4;
+  repeated string paths = 5;
+}
+
+message Meeting {
+	required string timelineId = 1;
+	required string sourceId = 2;
+	required uint64 timeStart = 3;
+	required uint64 timeEnd = 4;
+	required string description = 5;
+}
